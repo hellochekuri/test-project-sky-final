@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'io.cucumber', name: 'cucumber-java', version: '6.9.1'
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '6.9.1'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+
+}
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+test {
+    println "Cucumber tags are " + System.getProperty("cucumber.filter.tags")
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+    testLogging.showStandardStreams = true
+}
